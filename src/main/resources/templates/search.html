@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색 폼</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            display: inline-block;
+            width: 150px;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            width: calc(100% - 160px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100px; /* 수정된 부분: 버튼의 너비를 100px로 지정 */
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 auto; /* 수정된 부분: 버튼을 수평 중앙 정렬 */
+            display: block; /* 수정된 부분: 버튼을 블록 요소로 설정하여 줄 바꿈을 생성 */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #teamMemberSearchForm,
+        #teamSearchForm {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <button id="teamMemberSearchBtn" style="width: 100px;">팀원 검색</button>
+    <button id="teamSearchBtn">팀 검색</button>
+
+    <form id="teamMemberSearchForm" action="/search" method="GET">
+        <label for="search_query">팀원 검색:</label>
+        <input type="text" id="search_query" name="search_query" placeholder="내용을 입력하세요"><br>
+
+        <label for="team_name">이름:</label>
+        <input type="text" id="team_name" name="team_name" placeholder="이름을 입력하세요"><br>
+
+        <label for="team_name">나이:</label>
+        <input type="text" id="team_name" name="team_name" placeholder="나이을 입력하세요"><br>
+
+        <!-- <label for="team_size">성별:</label>
+        <input type="number" id="team_size" name="team_size" min="1" placeholder="팀 규모를 입력하세요"><br> -->
+
+        <label for="team_category">성별:</label>
+        <select id="team_category" name="team_category">
+            <option value="옵션1">남</option>
+            <option value="옵션2">여</option>
+            <!-- 필요에 따라 추가 -->
+        </select><br>
+
+        <label for="team_evaluation">팀원 평가 (성실성):</label>
+        <input type="text" id="team_evaluation" name="team_evaluation" placeholder="*점 이상 ~ *점 이하"><br>
+
+        <label for="team_member_evaluation">팀원 평가 (팀 내 협업 등):</label>
+        <input type="text" id="team_member_evaluation" name="team_member_evaluation" placeholder="*점 이상 ~ *점 이하"><br>
+
+        <label for="location">지역:</label>
+        <input type="text" id="location" name="location" placeholder="지역을 입력하세요"><br>
+
+        <button type="submit">검색</button>
+    </form>
+
+    <form id="teamSearchForm" action="/search" method="GET">
+        <label for="search_query">팀 검색:</label>
+        <input type="text" id="search_query" name="search_query" placeholder="내용을 입력하세요"><br>
+
+        <label for="team_name">팀명:</label>
+        <input type="text" id="team_name" name="team_name" placeholder="팀명을 입력하세요"><br>
+
+        <label for="team_size">팀 규모(인원 수):</label>
+        <input type="number" id="team_size" name="team_size" min="1" placeholder="팀 규모를 입력하세요"><br>
+
+        <label for="team_category">팀 카테고리:</label>
+        <select id="team_category" name="team_category">
+            <option value="옵션1">옵션1</option>
+            <option value="옵션2">옵션2</option>
+            <option value="옵션3">옵션3</option>
+            <!-- 필요에 따라 추가 -->
+        </select><br>
+
+        <label for="team_evaluation">팀원 평가 (성실성):</label>
+        <input type="text" id="team_evaluation" name="team_evaluation" placeholder="*점 이상 ~ *점 이하"><br>
+
+        <label for="team_member_evaluation">팀원 평가 (팀 내 협업 등):</label>
+        <input type="text" id="team_member_evaluation" name="team_member_evaluation" placeholder="*점 이상 ~ *점 이하"><br>
+
+        <label for="location">지역:</label>
+        <input type="text" id="location" name="location" placeholder="지역을 입력하세요"><br>
+
+        <button type="submit">검색</button>
+    </form>
+
+    <script>
+        const teamMemberSearchBtn = document.getElementById('teamMemberSearchBtn');
+        const teamSearchBtn = document.getElementById('teamSearchBtn');
+        const teamMemberSearchForm = document.getElementById('teamMemberSearchForm');
+        const teamSearchForm = document.getElementById('teamSearchForm');
+
+        teamMemberSearchBtn.addEventListener('click', () => {
+            teamMemberSearchForm.style.display = 'block';
+            teamSearchForm.style.display = 'none';
+        });
+
+        teamSearchBtn.addEventListener('click', () => {
+            teamMemberSearchForm.style.display = 'none';
+            teamSearchForm.style.display = 'block';
+        });
+    </script>
+</body>
+</html>

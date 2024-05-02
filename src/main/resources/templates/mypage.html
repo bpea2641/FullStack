@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FullStack</title>
+    <link rel="stylesheet" href="./mypagecss.css">
+    <style>
+
+        /* 추가적인 스타일링이 필요할 경우 여기에 추가하세요 */
+    </style>
+</head>
+<body>
+    <img src="dog3.jpg">
+    <div class="container">
+        <div class="menu">
+            <div class="menu-item" onclick="showForm('portfolio')">포트폴리오</div>
+            <div class="menu-item" onclick="showForm('create')">기획서</div>
+            <div class="menu-item" onclick="showForm('team')">팀 꾸리기</div>
+            <div class="menu-item" onclick="showForm('joiner')">조이너</div>
+            <div class="menu-item" onclick="showForm('myteam')">내 팀</div>
+        </div>
+        <div class="info-box" id="info-box">
+            <p>버튼을 누르면 이 곳에 해당 사항이 들어갑니다.</p>
+        </div>
+    </div>
+
+    <script>
+        function showForm(formType) {
+            var infoBox = document.getElementById('info-box');
+            var formHTML = '';
+
+            switch (formType) {
+                case 'portfolio':
+                    formHTML = `
+                        <h1>포트폴리오</h1>
+                        <div class="info-box" id="portfolio-box">
+                        <div class="portfolio-content">
+                            <div class="video-container">
+                                <video id="video-player" controls></video>
+                                <input type="file" accept="video/mp4" onchange="showVideo(event)">
+                            </div>
+                            <div class="description-container">
+                                <h3>영상 디테일</h3>
+                                <textarea id="video-description" placeholder="영상 설명을 입력하세요" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                    break;
+                case 'create':
+                    formHTML = `
+                        <h1>기획서</h1>
+                        <div class="menu">
+                            <div class="menu-item" onclick="showForm(1)">작품 정보 입력</div>
+                            <div class="menu-item" onclick="showForm(2)">이미지 정보 입력</div>
+                            <div class="menu-item" onclick="showForm(3)">텍스트 정보 입력</div>
+                        </div>
+                    `;
+                    break;
+                case 'team':
+                    formHTML = `
+                    <h1>팀 꾸리기</h1>
+                    <button onclick="addTeam()">팀 추가</button>
+                    <div id="team-container"></div>
+                    `;
+                    break;
+                case 'joiner':
+                    formHTML = `
+                    <div class="row">
+                        <div class="col">
+                            <h3 onclick="selectImage()">이종태</h3>
+                            <div class="menu-item" onclick="showForm('portfolio')">포트폴리오</div>
+                            <div class="menu-item" onclick="showForm('create')">작품 만들기</div>
+                            <div class="menu-item" onclick="showForm('myteam')">내 팀</div>
+                        </div>
+                        <div class="col right-section">
+                            <img id="thumbnail" width="180" height="180" align="center" border="0" onclick="selectImage()">
+                            <h3>나는 이런 팀에 들어가고 싶음</h3>
+                            <textarea placeholder="나는 이런 것을 맡고 싶음. , 나는 이런 것을 잘함" rows="4"></textarea>
+                            <h3>현재 진행중인 작품 또는 완료한 작품</h3>
+                            <textarea placeholder="현재 진행중인 작품 또는 완료한 작품을 입력하세요" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span></span>
+                        </div>
+                        <div class="col">
+                            <button>button</button>
+                            <button>button</button>
+                        </div>
+                    </div>
+                    `;
+                    break;
+                case 'myteam':
+                    formHTML = `
+                        <h1>내 팀</h1>
+                        <div class="row">
+                            <div class="col">
+                                팀장: <input type="text" value="팀장"><br/>
+                                역할: <input type="text" value="역할">
+                            </div>
+                            <div class="col">
+                                팀원: <input type="text" value="팀원"><br/>
+                                역할: <input type="text" value="역할">
+                            </div>
+                            <div class="col">
+                                팀원: <input type="text" value="팀원"><br/>
+                                역할: <input type="text" value="역할">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="row">
+                            <div class="col">   
+                                팀원: <input type="text" value="팀원"><br/>
+                                역할: <input type="text" value="역할">
+                            </div>
+                            <div class="col">
+                                팀원: <input type="text" value="팀원"><br/>
+                                역할: <input type="text" value="역할">
+                            </div>
+                            <div class="col">
+                                팀원: <input type="text" value="팀원"><br/>
+                                역할: <input type="text" value="역할">
+                            </div>
+                        </div>
+                        <div id="team-members">
+                            <!-- 초기에는 아무 내용도 없음 -->
+                        </div>
+                        <br />
+                        <br />
+                        <button onclick="complete()">완성</button>
+                        <button onclick="giveUp()">중도포기</button>
+                        <button onclick="end()">종료</button>
+                        <button onclick="addTeamMembers()">팀원 추가</button>
+                    `;
+                    break;
+                case 1:
+                    formHTML = `
+                        <h1>작품 정보 입력</h1>
+                        <div class="create-item">
+                            <h3>작품 이름</h3>
+                            <input type="text" placeholder="작품 이름을 입력하세요">
+                            <h3>팀장</h3>
+                            <input type="text" placeholder="팀장 이름을 입력하세요">
+                            <h3>팀원</h3>
+                            <input type="text" placeholder="팀원 이름을 입력하세요">
+                        </div>
+                    `;
+                    break;
+                case 2:
+                    formHTML = `
+                    <h1>이미지 정보 입력</h1>
+                    <div class="create-item">
+                        <div class="row">
+                            <div class="col">
+                                <h3>이미지 추가</h3>
+                                <input type="file" accept="image/*" onchange="showImage(event)">
+                                <div class="image-preview" id="image-preview"></div>
+                            </div>
+                            <div class="col right-section">
+                                <h3>이미지 설명</h3>
+                                <textarea id="image-description" placeholder="이미지에 대한 설명을 입력하세요" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                    break;
+                case 3:
+                    formHTML = `
+                        <h1>작품 설명 입력</h1>
+                        <div class="create-item">
+                            <h3>작품 설명</h3>
+                            <textarea placeholder="작품에 대한 설명을 입력하세요" rows="4"></textarea>
+                            <h3>공백칸 1</h3>
+                            <textarea placeholder="작품에 대한 추가 설명을 입력하세요" rows="4"></textarea>
+                            <h3>공백칸 2</h3>
+                            <textarea placeholder="작품에 대한 추가 설명을 입력하세요" rows="4"></textarea>
+                        </div>
+                    `;
+                    break;
+                default:
+                    formHTML = '<p>버튼을 누르면 이 곳에 해당 사항이 들어갑니다.</p>';
+                    break;
+            }
+
+            infoBox.innerHTML = formHTML;
+        }
+
+        function selectImage() {
+            // 파일 선택 창 열기
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = function(event) {
+                var file = event.target.files[0];
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var thumbnail = document.getElementById('thumbnail');
+                    thumbnail.src = e.target.result; // 선택한 이미지로 썸네일 업데이트
+                }
+                reader.readAsDataURL(file);
+            }
+            input.click();
+        }
+        function showVideo(event) {
+            var videoPlayer = document.getElementById('video-player');
+            var videoDescription = document.getElementById('video-description');
+            var file = event.target.files[0];
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                videoPlayer.src = e.target.result; // 선택한 영상을 플레이어에 표시
+            }
+            reader.readAsDataURL(file);
+        }
+        var teamCount = 0;
+        function addTeam() {
+            teamCount++;
+            var teamContainer = document.getElementById('team-container');
+            var teamDiv = document.createElement('div');
+            teamDiv.classList.add('team-info');
+            teamDiv.innerHTML = `
+                <h3>팀 ${teamCount}</h3>
+                해야 할 일: <textarea id="task-${teamCount}" name="task-${teamCount}" placeholder="해야 할 일"></textarea> <br/>
+                앞으로 필요한 인원 수: <input type="number" id="needed-${teamCount}" name="needed-${teamCount}" min="0" placeholder="앞으로 필요한 인원 수"> <br/>
+                정해진 인원 수: <input type="number" id="fixed-${teamCount}" name="fixed-${teamCount}" min="0" placeholder="정해진 인원 수">
+            `;
+            teamContainer.appendChild(teamDiv);
+        }
+        function showImage(event) {
+        var imagePreview = document.getElementById('image-preview');
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var image = document.createElement('img');
+            image.src = e.target.result;
+            imagePreview.innerHTML = '';
+            imagePreview.appendChild(image);
+        }
+        reader.readAsDataURL(file);
+    }
+    function addTeamMembers() {
+        var teamMembersContainer = document.getElementById('team-members');
+        
+        // 새로운 팀원 정보를 담을 요소 생성
+        var newRow = document.createElement('div');
+        newRow.className = 'row';
+
+        for (var i = 0; i < 3; i++) {
+            var newCol = document.createElement('div');
+            newCol.className = 'col';
+            newCol.innerHTML = `
+                <div class="team-member">
+                    <br/>팀원: <input type="text" value="팀원"><br/>
+                    역할: <input type="text" value="역할">
+                </div>
+            `;
+            newRow.appendChild(newCol);
+        }
+
+        // 새로운 행 추가
+        teamMembersContainer.appendChild(newRow);
+    }
+
+
+    </script>
+    
+</body>
+</html>
