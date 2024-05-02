@@ -4,9 +4,10 @@ spring:
 
 
   datasource:
-    url: jdbc:mysql://127.0.0.1/member?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://127.0.0.1/fullstack?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&serverTimezone=Asia/Seoul
     username: root
     password: bpea2641
+
 
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect

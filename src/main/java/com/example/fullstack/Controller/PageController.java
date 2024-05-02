@@ -17,4 +17,9 @@ public class PageController {
     public String search() {
         return "/page/search.html";
     }
+
+    @GetMapping("/test")
+    public String test() {
+        return "/page/test.html";
+    }
 }

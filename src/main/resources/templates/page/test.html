@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다중 검색 테스트</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>다중 검색 테스트</h1>
+    <form id="searchForm" action="/search" method="GET">
+        <label for="name">이름:</label>
+        <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
+
+        <label for="age">나이:</label>
+        <input type="number" id="age" name="age" placeholder="나이를 입력하세요">
+
+        <label for="gender">성별:</label>
+        <select id="gender" name="gender">
+            <option value="">성별을 선택하세요</option>
+            <option value="남자">남자</option>
+            <option value="여자">여자</option>
+        </select>
+
+        <label for="sincerityRating">팀원 평가 (성실성):</label>
+        <input type="number" id="sincerityRating" name="sincerityRating" placeholder="평가 점수를 입력하세요">
+
+        <label for="location">지역:</label>
+        <input type="text" id="location" name="location" placeholder="지역을 입력하세요">
+
+        <button type="submit">검색</button>
+    </form>
+    <h1>다중 검색 결과</h1>
+    <div id="searchResult">
+        <!-- 여기에 검색 결과가 나타날 부분 -->
+    </div>
+</div>
+
+<script>
+    // 검색 폼에서 제출되었을 때 실행되는 함수
+    function submitSearchForm(event) {
+        event.preventDefault(); // 기본 제출 동작 방지
+
+        // 검색 폼 데이터 가져오기
+        const formData = new FormData(event.target);
+        const searchParams = new URLSearchParams(formData).toString();
+
+        // 서버에 검색 요청 보내기
+        fetch('/search?' + searchParams)
+            .then(response => response.json())
+            .then(data => {
+                // 검색 결과를 표시하기 위해 HTML 생성
+                let html = '<table border="1"><tr><th>이름</th><th>나이</th><th>성별</th><th>팀원 평가</th><th>지역</th></tr>';
+                data.forEach(item => {
+                    html += `<tr><td>${item.name}</td><td>${item.age}</td><td>${item.gender}</td><td>${item.sincerityRating}</td><td>${item.location}</td></tr>`;
+                });
+                html += '</table>';
+
+                // 검색 결과를 화면에 표시
+                document.getElementById('searchResult').innerHTML = html;
+            })
+            .catch(error => console.error('검색 실패:', error));
+    }
+
+    // 검색 폼에 이벤트 리스너 추가
+    document.getElementById('searchForm').addEventListener('submit', submitSearchForm);
+</script>
+</body>
+</html>
