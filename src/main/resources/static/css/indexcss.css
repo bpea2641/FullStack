@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overwatch</title>
-    <style>
         body {
             margin: 0;
             padding: 0;
@@ -57,25 +50,3 @@
         .info-box:nth-child(odd) {
             margin-right: 10px; /* 수정된 부분: 홀수번째 요소에 오른쪽 마진 추가 */
         }
-    </style>
-</head>
-<body>
-    <img src="dog3.jpg">
-    <div class="container">
-        <div class="menu">
-            <div class="menu-item">홈</div>
-            <div class="menu-item"><a href="./mypage.html">마이페이지</a></div>
-            <div class="menu-item">검색</div>
-            <div class="menu-item">--</div>
-        </div>
-        <div class="info-box">
-            <h2>공지사항</h2>
-            <p>이 곳에 공지사항이 들어갑니다.</p>
-        </div>
-        <div class="info-box">
-            <h2>광고</h2>
-            <p>이 곳에 광고가 들어갑니다.</p>
-        </div>
-    </div>
-</body>
-</html>
