@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/member.css">
+    <script src="member.js"></script>
+    <title>회원가입</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>회원가입</h2>
+        </div>
+        <form id="form" class="form">
+            <div class="form-control">
+                <label for="username">성명</label>
+                <input type="text" placeholder="홍길동" id="username" />
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label for="username">이메일</label>
+                <input type="email" placeholder="a@google.com" id="email" />
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label for="username">비밀번호</label>
+                <input type="password" placeholder="비밀번호 입력" id="password"/>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label for="username">비밀번호 확인</label>
+                <input type="password" placeholder="비밀번호 재입력" id="password2"/>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <button type="submit">가입하기</button>
+        </form>
+    </div>

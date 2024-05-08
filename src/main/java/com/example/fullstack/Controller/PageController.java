@@ -22,4 +22,5 @@ public class PageController {
     public String test() {
         return "/page/test.html";
     }
+
 }
