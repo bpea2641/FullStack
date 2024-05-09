@@ -47,4 +47,10 @@ public class MemberService {
         }
         return null;
     }
+
+    public Optional<MemberDTO> findById(Long id) {
+        return memberRepository.findById(id).map(MemberDTO::toMemberDTO);
+    }
+
+
 }

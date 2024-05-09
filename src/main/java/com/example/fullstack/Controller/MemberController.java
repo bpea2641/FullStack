@@ -19,7 +19,6 @@ public class MemberController {
 
     @GetMapping("/member/login")
     public String login(){
-
         return "/member/login";
     }
 
@@ -36,16 +35,14 @@ public class MemberController {
         if (loginResult != null){
             // 로그인 성공
             session.setAttribute("userName", loginResult.getUserName());
-            session.setAttribute("userId", loginResult.getUserId());
-            return "/arsha/index.html";
+            session.setAttribute("userId", loginResult.getId()); // 사용자 ID를 세션에 저장
+            return "redirect:/homepage/" + loginResult.getId(); // 홈페이지로 이동하면서 사용자 ID를 경로에 포함
         } else {
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<script>alert('아이디 혹은 비번을 확인하세요.'); history.go(-1);</script>");
-            out.flush();
+            // 로그인 실패 시
+            return "redirect:/arsha/login";
         }
-        return "/";
     }
+
 
     @GetMapping("/member/join")
     public String join(){

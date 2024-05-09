@@ -35,5 +35,4 @@ public class NoticeController {
         model.addAttribute("notice", noticeDTO);
         return "/notice/notice_detail";
     }
-
 }

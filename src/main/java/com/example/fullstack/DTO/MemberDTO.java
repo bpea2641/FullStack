@@ -24,6 +24,7 @@ public class MemberDTO {
     private String userAddress2;
     private String userBirth;
     private String userGender;
+    private String userCareer;
 
     public static MemberDTO toMemberDTO(MemberEntity memberEntity) {
         MemberDTO memberDTO = new MemberDTO();
@@ -39,6 +40,7 @@ public class MemberDTO {
         memberDTO.setUserAddress2(memberEntity.getUserAddress2());
         memberDTO.setUserBirth(memberEntity.getUserBirth());
         memberDTO.setUserGender(memberEntity.getUserGender());
+        memberDTO.setUserCareer(memberEntity.getUserCareer());
         return memberDTO;
     }
 }

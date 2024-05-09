@@ -47,6 +47,9 @@ public class MemberEntity {
     @Column
     private String userGender;
 
+    @Column
+    private String userCareer;
+
     public static MemberEntity toMemberEntity(MemberDTO memberDTO) {
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setUserId(memberDTO.getUserId());
@@ -60,6 +63,7 @@ public class MemberEntity {
         memberEntity.setUserAddress2(memberDTO.getUserAddress2());
         memberEntity.setUserBirth(memberDTO.getUserBirth());
         memberEntity.setUserGender(memberDTO.getUserGender());
+        memberEntity.setUserCareer(memberDTO.getUserCareer());
         return memberEntity;
     }
 }
