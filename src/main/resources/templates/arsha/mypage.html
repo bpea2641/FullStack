@@ -97,10 +97,28 @@
     </div><!-- End Page Title -->
     <!-- Starter Section Section -->
     <section id="starter-section" class="starter-section section">
-        <div class="container" data-aos="fade-up">
-            <p>Use this page as a starter for your own custom pages.</p>
-            <p th:text="${member.userCareer}"></p>
-        </div>
+        <form th:action="@{|/portfolio/save/${member.id}|}" method="post" enctype="multipart/form-data">
+            <div class="container" data-aos="fade-up">
+                <input type="hidden" name="id" th:value="${member.id}">
+                이름: <span th:text="${member.userName}"></span> <br/>
+                성별: <span th:text="${member.userGender}"></span> <br/>
+                전화번호: <span th:text="${member.userPhone}"></span> <br/>
+                주소: <span th:text="${member.userAddress1}"></span> <br/>
+                상세주소: <span th:text="${member.userAddress2}"></span> <br/>
+                소개글: <span th:text="${member.userIntro}"></span> <br/>
+                경력: <span th:text="${member.userCareer}"></span> <br/>
+                포트폴리오: <input type="file" id="fileInput" name="portfolioFile" onchange="updateImage()" multiple>
+                <img id="boardImage" alt="">
+                저장: <input type="submit" value="저장">
+                <div th:if="${portfolio_entity.fileAttached != null and portfolio_entity.fileAttached == 1}">
+                    <img th:src="${|${portfolio_entity.storedFileName}|}">
+                </div>
+                <div th:unless="${portfolio_entity.fileAttached != null and portfolio_entity.fileAttached == 1}">
+                    포트폴리오 없음
+                </div>
+
+            </div>
+        </form>
     </section><!-- /Starter Section Section -->
 </main>
 
@@ -202,6 +220,21 @@
 
 <!-- Main JS File -->
 <script src="/assets/js/main.js"></script>
+
+<script>
+    function updateImage() {
+        var fileInput = document.getElementById('fileInput');
+        var boardImage = document.getElementById('boardImage');
+
+        if (fileInput.files && fileInput.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+              boardImage.src = e.target.result;
+          }
+          reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+</script>
 
 </body>
 

@@ -1,10 +1,9 @@
 package com.example.fullstack.DTO;
 
 import com.example.fullstack.Entity.MemberEntity;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.OneToMany;
+import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Getter
@@ -25,6 +24,7 @@ public class MemberDTO {
     private String userBirth;
     private String userGender;
     private String userCareer;
+
 
     public static MemberDTO toMemberDTO(MemberEntity memberEntity) {
         MemberDTO memberDTO = new MemberDTO();

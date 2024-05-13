@@ -2,8 +2,13 @@ package com.example.fullstack.Entity;
 
 import com.example.fullstack.DTO.MemberDTO;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -49,6 +54,12 @@ public class MemberEntity {
 
     @Column
     private String userCareer;
+
+    @Column
+    private int fileAttached; // 1 or 0
+
+    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<PortfolioEntity> memberFileEntityList = new ArrayList<>();
 
     public static MemberEntity toMemberEntity(MemberDTO memberDTO) {
         MemberEntity memberEntity = new MemberEntity();
